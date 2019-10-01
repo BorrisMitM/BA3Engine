@@ -19,6 +19,9 @@ int main()
 	sprite.setColor(sf::Color(255, 255, 255, 200));
 	sprite.setPosition(100, 25);
 	float speed = .2f;
+	Clock clock;
+	float lastAction = 0;
+	float duration = 1;
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -28,6 +31,12 @@ int main()
 				window.close();
 		}
 
+		Time elapsedTime = clock.getElapsedTime();
+		if (elapsedTime.asSeconds() >= lastAction + duration) {
+			lastAction = elapsedTime.asSeconds();
+			sprite.setColor(Color(255, 255, 255, rand() % 256));
+			cout << "changed color" << endl;
+		}
 		window.clear();
 		window.draw(shape);
 		//if (Mouse::isButtonPressed(Mouse::Left)) {
