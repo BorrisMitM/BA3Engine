@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 using namespace sf;
+bool SpriteClicked(Window *window, Sprite * sprite);
+void HandleMouseButton(bool* mouseButtonDown, bool* mouseButtonUp);
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
@@ -22,6 +24,9 @@ int main()
 	Clock clock;
 	float lastAction = 0;
 	float duration = 1;
+	int i = 0;
+	bool mouseButtonDown = false;
+	bool mouseButtonUp = false;
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -30,19 +35,28 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
+		HandleMouseButton(&mouseButtonDown, &mouseButtonUp);
 
 		Time elapsedTime = clock.getElapsedTime();
 		if (elapsedTime.asSeconds() >= lastAction + duration) {
 			lastAction = elapsedTime.asSeconds();
-			sprite.setColor(Color(255, 255, 255, rand() % 256));
-			cout << "changed color" << endl;
+			sprite.setColor(Color(rand() %255, rand() % 255, rand() % 255, 255));
 		}
 		window.clear();
 		window.draw(shape);
-		//if (Mouse::isButtonPressed(Mouse::Left)) {
-		Vector2f dir = (Vector2f)Mouse::getPosition(window) - sprite.getPosition();
-		dir = dir / sqrt(dir.x * dir.x + dir.y * dir.y);
-		sprite.setPosition(sprite.getPosition() + dir * speed);
+		if (mouseButtonDown) {
+			if(SpriteClicked(&window, &sprite))
+				cout << "hit" << i <<endl;
+			i++;
+		}
+		if (mouseButtonUp) {
+			if (SpriteClicked(&window, &sprite))
+				cout << "release" << i << endl;
+			i++;
+		}
+		//Vector2f dir = (Vector2f)Mouse::getPosition(window) - sprite.getPosition();
+		//dir = dir / sqrt(dir.x * dir.x + dir.y * dir.y);
+		//sprite.setPosition(sprite.getPosition() + dir * speed);
 		
 		window.draw(sprite);
 		window.draw(rect);
@@ -50,4 +64,32 @@ int main()
 	}
 
 	return 0;
+}
+
+bool SpriteClicked(Window* window, Sprite* sprite) {
+	if ((float)Mouse::getPosition(*window).x >= sprite->getPosition().x
+		&& (float)Mouse::getPosition(*window).x <= sprite->getPosition().x + sprite->getTextureRect().width
+		&& (float)Mouse::getPosition(*window).y >= sprite->getPosition().y
+		&& (float)Mouse::getPosition(*window).y <= sprite->getPosition().y + sprite->getTextureRect().height)
+		return true;
+	return false;
+}
+bool canMouseButtonDown = true;
+bool canMouseButtonUp = true;
+void HandleMouseButton(bool* mouseButtonDown, bool* mouseButtonUp) {
+	if (!(*mouseButtonDown) && Mouse::isButtonPressed(Mouse::Left) && canMouseButtonDown) {
+		*mouseButtonDown = true;
+		canMouseButtonDown = false;
+		canMouseButtonUp = true;
+	}
+	else if (*mouseButtonDown)
+		*mouseButtonDown = false;
+	else if (!(*mouseButtonUp) && !Mouse::isButtonPressed(Mouse::Left) && canMouseButtonUp) {
+		*mouseButtonUp = true;
+		canMouseButtonDown = true;
+		canMouseButtonUp = false;
+	}
+	else if (*mouseButtonUp)
+		*mouseButtonUp = false;
+
 }
