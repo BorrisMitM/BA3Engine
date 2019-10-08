@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "rapidxml.hpp"
 #include <iostream>
 using namespace std;
 using namespace sf;
@@ -7,12 +8,7 @@ void HandleMouseButton(bool* mouseButtonDown, bool* mouseButtonUp);
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
-	RectangleShape rect(Vector2f(40.f, 40.f));
-	rect.setFillColor(Color::Red);
-	Vector2i clickPos = Vector2i(250, 250);
-
+	//load texture and create sprite from it
 	Texture texture;
 	texture.loadFromFile("texture.jpg");
 	sf::Sprite sprite;
@@ -20,11 +16,8 @@ int main()
 	//sprite.setTextureRect(sf::IntRect(10, 10, 50, 30));
 	sprite.setColor(sf::Color(255, 255, 255, 200));
 	sprite.setPosition(100, 25);
-	float speed = .2f;
+
 	Clock clock;
-	float lastAction = 0;
-	float duration = 1;
-	int i = 0;
 	bool mouseButtonDown = false;
 	bool mouseButtonUp = false;
 	while (window.isOpen())
@@ -35,31 +28,12 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
+		window.clear();
 		HandleMouseButton(&mouseButtonDown, &mouseButtonUp);
 
 		Time elapsedTime = clock.getElapsedTime();
-		if (elapsedTime.asSeconds() >= lastAction + duration) {
-			lastAction = elapsedTime.asSeconds();
-			sprite.setColor(Color(rand() %255, rand() % 255, rand() % 255, 255));
-		}
-		window.clear();
-		window.draw(shape);
-		if (mouseButtonDown) {
-			if(SpriteClicked(&window, &sprite))
-				cout << "hit" << i <<endl;
-			i++;
-		}
-		if (mouseButtonUp) {
-			if (SpriteClicked(&window, &sprite))
-				cout << "release" << i << endl;
-			i++;
-		}
-		//Vector2f dir = (Vector2f)Mouse::getPosition(window) - sprite.getPosition();
-		//dir = dir / sqrt(dir.x * dir.x + dir.y * dir.y);
-		//sprite.setPosition(sprite.getPosition() + dir * speed);
 		
 		window.draw(sprite);
-		window.draw(rect);
 		window.display();
 	}
 
