@@ -1,5 +1,5 @@
 #pragma once
-#include "SpriteAsset.h"
+#include "DrawableAsset.h"
 #include "SFML/Graphics.hpp"
 #include "rapidxml.hpp"
 
@@ -8,7 +8,7 @@ using namespace rapidxml;
 class MySprite
 {
 private:
-	SpriteAsset* sprite;
+	DrawableAsset* sprite;
 	Vector2f pos;
 	Vector2f size;
 public:

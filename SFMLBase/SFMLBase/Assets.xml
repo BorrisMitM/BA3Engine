@@ -1,9 +1,9 @@
 <game title="XMLTest" fps="50" height="768" width="1024">
 	<assetpath>assets\<asset type = "sprite" ID = "Wrestler">texture.jpg</asset>
+	<asset type = "anim" ID = "lol" width = "50" height = "37" duration = "1" amount = "6" offset = "8">Adventurer.png</asset>
 	</assetpath>
 	-<scene name="scene1">
-		<sprite layer = "2" posx = "400" posy = "200">Wrestler</sprite>
-		<sprite layer = "1" sizey = "0.5">Wrestler</sprite>
-		<sprite layer = "0" posx = "200" sizex = "2">Wrestler</sprite>
+		<sprite layer = "2" sizey = "1" sizex = "1" posx = "300" posy = "100">Wrestler</sprite>
+		<sprite layer = "2" sizey = "3" sizex = "3" posx = "100" posy = "100">lol</sprite>
 	</scene>
 </game>

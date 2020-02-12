@@ -126,12 +126,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="AnimationAsset.cpp" />
     <ClCompile Include="AudioAsset.cpp" />
+    <ClCompile Include="DrawableAsset.cpp" />
     <ClCompile Include="GameAsset.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MySprite.cpp" />
+    <ClCompile Include="MyTime.cpp" />
     <ClCompile Include="SpriteAsset.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -141,11 +144,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="AnimationAsset.h" />
     <ClInclude Include="AudioAsset.h" />
+    <ClInclude Include="DrawableAsset.h" />
     <ClInclude Include="GameAsset.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="MySprite.h" />
+    <ClInclude Include="MyTime.h" />
     <ClInclude Include="SpriteAsset.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

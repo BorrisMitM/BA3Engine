@@ -4,7 +4,7 @@
 
 void MySprite::Setup(xml_node<>* spriteNode, map<string, GameAsset*>& assets)
 {
-	sprite = (SpriteAsset*)assets[spriteNode->value()];
+	sprite = (DrawableAsset*)assets[spriteNode->value()];
 	xml_attribute<>* attr = GameManager::FindAttribute(spriteNode, "posx");
 	if(attr != NULL)pos.x = atoi(attr->value());
 	attr = GameManager::FindAttribute(spriteNode, "posy");
@@ -20,9 +20,7 @@ void MySprite::Setup(xml_node<>* spriteNode, map<string, GameAsset*>& assets)
 
 void MySprite::Update(RenderWindow & window)
 {
-	sprite->sprite.setPosition(pos);
-	sprite->sprite.setScale(size);
-	window.draw(sprite->sprite);
+	sprite->Update(window, pos, size);
 }
 
 MySprite::MySprite()

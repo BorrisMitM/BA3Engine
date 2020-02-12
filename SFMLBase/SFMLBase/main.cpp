@@ -5,6 +5,7 @@
 #include <list>
 #include <stdio.h>
 #include "GameManager.h"
+#include "MyTime.h"
 using namespace std;
 using namespace sf;
 using namespace rapidxml;
@@ -17,9 +18,9 @@ void HandleMouseButton(bool* mouseButtonDown, bool* mouseButtonUp);
 int main()
 {
 	GameManager* manager = new GameManager();
+	MyTime* time = new MyTime();
 	manager->LoadXML("Assets.xml");
 	sf::RenderWindow window(sf::VideoMode(manager->GameConfig.width, manager->GameConfig.height), manager->GameConfig.name);
-	Clock clock;
 	bool mouseButtonDown = false;
 	bool mouseButtonUp = false;
 	while (window.isOpen())
@@ -32,8 +33,6 @@ int main()
 		}
 		window.clear();
 		HandleMouseButton(&mouseButtonDown, &mouseButtonUp);
-
-		Time elapsedTime = clock.getElapsedTime();
 		manager->Update(window);
 		window.display();
 	}
