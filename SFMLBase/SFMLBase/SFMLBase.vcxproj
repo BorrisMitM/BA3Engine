@@ -125,10 +125,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
     <ClCompile Include="AudioAsset.cpp" />
     <ClCompile Include="GameAsset.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MySprite.cpp" />
     <ClCompile Include="SpriteAsset.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +140,12 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
     <ClInclude Include="AudioAsset.h" />
     <ClInclude Include="GameAsset.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="MySprite.h" />
     <ClInclude Include="SpriteAsset.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

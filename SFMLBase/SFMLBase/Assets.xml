@@ -1,9 +1,9 @@
 <game title="XMLTest" fps="50" height="768" width="1024">
-	<assetpath>assets/
+	<assetpath>
+		<asset type = "sprite" ID = "Wrestler">texture.jpg</asset>
 	</assetpath>
 	-<scene name="scene1">
-		-<assets>
-				<asset type="sprite" id="crosshair">texture.jpg</asset>
-		</assets>
+		<sprite layer = "1">Wrestler</sprite>
+		<sprite layer = "0" posx = "200">Wrestler</sprite>
 	</scene>
 </game>

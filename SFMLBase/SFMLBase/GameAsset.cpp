@@ -2,6 +2,11 @@
 
 
 
+void GameAsset::Setup(xml_node<>* pNode, string assetPath)
+{
+}
+
+
 GameAsset::GameAsset()
 {
 }
