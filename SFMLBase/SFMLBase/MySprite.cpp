@@ -11,14 +11,17 @@ void MySprite::Setup(xml_node<>* spriteNode, map<string, GameAsset*>& assets)
 	if (attr != NULL)pos.y = atoi(attr->value());
 	
 	attr = GameManager::FindAttribute(spriteNode, "sizex");
-	if (attr != NULL)size.x = atoi(attr->value());
-	attr = GameManager::FindAttribute(spriteNode, "sizex");
-	if (attr != NULL)size.x = atoi(attr->value());
+	if (attr != NULL)size.x = atof(attr->value());
+	else size.x = 1;
+	attr = GameManager::FindAttribute(spriteNode, "sizey");
+	if (attr != NULL)size.y = atof(attr->value());
+	else size.y = 1;
 }
 
 void MySprite::Update(RenderWindow & window)
 {
 	sprite->sprite.setPosition(pos);
+	sprite->sprite.setScale(size);
 	window.draw(sprite->sprite);
 }
 
