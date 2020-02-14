@@ -126,8 +126,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="ActionCallback.cpp" />
     <ClCompile Include="AnimationAsset.cpp" />
-    <ClCompile Include="AudioAsset.cpp" />
+    <ClCompile Include="AudioAction.cpp" />
     <ClCompile Include="DrawableAsset.cpp" />
     <ClCompile Include="GameAsset.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -145,8 +146,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionCallback.h" />
     <ClInclude Include="AnimationAsset.h" />
-    <ClInclude Include="AudioAsset.h" />
+    <ClInclude Include="AudioAction.h" />
     <ClInclude Include="DrawableAsset.h" />
     <ClInclude Include="GameAsset.h" />
     <ClInclude Include="GameManager.h" />

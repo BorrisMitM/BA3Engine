@@ -3,7 +3,6 @@
 #include "SFML/Graphics.hpp"
 class AnimationAsset : public DrawableAsset
 {
-	Texture texture;
 	Sprite sprite;
 	int width, height, amount,  offset, currentFrame, nextFrameChange, columns;
 	float duration;

@@ -27,9 +27,6 @@
     <ClCompile Include="SpriteAsset.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="AudioAsset.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Action.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -51,6 +48,12 @@
     <ClCompile Include="Player.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="AudioAction.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionCallback.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets.xml">
@@ -65,9 +68,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="SpriteAsset.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioAsset.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Action.h">
@@ -89,6 +89,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioAction.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionCallback.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

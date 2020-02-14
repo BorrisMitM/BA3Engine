@@ -34,6 +34,7 @@ int main()
 		}
 		window.clear();
 		manager->player->Update(Vector2f(Mouse::getPosition(window)), mouseButtonDown);
+		manager->currentScene->CheckActions(window, mouseButtonDown, Vector2f(Mouse::getPosition(window)));
 		HandleMouseButton(&mouseButtonDown, &mouseButtonUp);
 		manager->Update(window);
 		window.display();

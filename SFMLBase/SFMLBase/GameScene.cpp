@@ -25,9 +25,17 @@ void GameScene::Setup(xml_node<>* sceneNode, map<string, GameAsset*>& assets)
 			else layerTwo.push_back(newSprite);
 		}
 		else if (strcmp(pChild->name(), "action") == 0) {
-
+			Action* newAction = new Action();
+			newAction->Setup(pChild, assets);
+			actions.push_back(newAction);
 		}
 	}
+}
+
+void GameScene::CheckActions(RenderWindow & window, bool mouseDown, Vector2f mousePos)
+{
+	for (int i = 0; i < actions.size(); i++)
+		actions[i]->Check(window, this, mouseDown, mousePos);
 }
 
 void GameScene::Update(RenderWindow& window)

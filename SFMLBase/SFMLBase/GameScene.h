@@ -9,8 +9,8 @@
 
 class GameScene
 {
-	Player* player;
 public:
+	Player* player;
 	string name;
 	vector<MySprite*> layerZero; // background
 	vector<MySprite*> layerOne;	// behind player
@@ -18,6 +18,7 @@ public:
 	vector<Action*> actions;
 	Vector2f startPosition;
 	void Setup(xml_node<>* sceneNode, map<string, GameAsset*>& assets);
+	void CheckActions(RenderWindow& window, bool mouseDown, Vector2f mousePos);
 	void Update(RenderWindow& window);
 	void LoadScene(Player* _player);
 	GameScene();

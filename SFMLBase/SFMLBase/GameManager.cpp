@@ -1,8 +1,8 @@
 #include "GameManager.h"
 #include "SpriteAsset.h"
-#include "AudioAsset.h"
 #include "AnimationAsset.h"
 #include "Action.h"
+#include "AudioAction.h"
 #include <cstring>
 
 
@@ -77,7 +77,7 @@ void GameManager::LoadXML(string path) {
 				attr = FindAttribute(pChild, "type");
 				if (attr != NULL) {
 					if (strcmp(attr->value(), "sprite") == 0) pAsset = new SpriteAsset();
-					else if (strcmp(attr->value(), "audio") == 0) pAsset = new AudioAsset();
+					else if (strcmp(attr->value(), "audio") == 0) pAsset = new AudioAction();
 					else if (strcmp(attr->value(), "anim") == 0) pAsset = new AnimationAsset();
 					if(pAsset != NULL)
 						pAsset->Setup(pChild, GameConfig.assetPath);

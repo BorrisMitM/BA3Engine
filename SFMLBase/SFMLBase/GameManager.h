@@ -17,8 +17,8 @@ private:
 
 
 	map<string, GameAsset*> assets;
-	GameScene* currentScene;
 public:
+	GameScene* currentScene;
 	GameManager();
 	~GameManager();
 

@@ -4,12 +4,14 @@
 
 void MySprite::Setup(xml_node<>* spriteNode, map<string, GameAsset*>& assets)
 {
-	sprite = (DrawableAsset*)assets[spriteNode->value()];
+	name = spriteNode->value();
 	xml_attribute<>* attr = GameManager::FindAttribute(spriteNode, "posx");
 	if(attr != NULL)pos.x = atoi(attr->value());
 	attr = GameManager::FindAttribute(spriteNode, "posy");
 	if (attr != NULL)pos.y = atoi(attr->value());
-	
+
+	attr = GameManager::FindAttribute(spriteNode, "asset");
+	if(attr!= NULL) sprite = (DrawableAsset*)assets[attr->value()];
 	attr = GameManager::FindAttribute(spriteNode, "sizex");
 	if (attr != NULL)size.x = atof(attr->value());
 	else size.x = 1;
@@ -21,6 +23,16 @@ void MySprite::Setup(xml_node<>* spriteNode, map<string, GameAsset*>& assets)
 void MySprite::Update(RenderWindow & window)
 {
 	sprite->Update(window, pos, size);
+}
+
+bool MySprite::MouseOnSprite(RenderWindow & window)
+{
+	if ((float)Mouse::getPosition(window).x >= pos.x - sprite->texture.getSize().x * size.x / 2.0
+		&& (float)Mouse::getPosition(window).x <= pos.x + sprite->texture.getSize().x * size.x / 2.0
+		&& (float)Mouse::getPosition(window).y >= pos.y - sprite->texture.getSize().y * size.y / 2.0
+		&& (float)Mouse::getPosition(window).y <= pos.y + sprite->texture.getSize().y * size.y / 2.0)
+		return true;
+	return false;
 }
 
 MySprite::MySprite()

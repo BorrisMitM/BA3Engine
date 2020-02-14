@@ -3,12 +3,16 @@
 		<asset type = "sprite" ID = "Wrestler">texture.jpg</asset>
 		<asset type = "anim" ID = "walk" width = "50" height = "37" duration = "1" amount = "6" offset = "8">Adventurer.png</asset>
 		<asset type = "anim" ID = "idle" width = "50" height = "37" duration = "0.66" amount = "4" offset = "0">Adventurer.png</asset>
+		<asset type = "audio" ID = "door">Door.wav</asset>
 	</assets>
 	<player speed = "150" ytop = "300" ybot = "700" topscale = "2" botscale = "4" idle ="idle" walk = "walk" spritescalex = "3" spritescaley = "3"></player>
 	-<scene name="scene1" startposx = "100" startposy = "400">
+		<sprite asset = "Wrestler" layer = "1" sizey = "1" sizex = "1" posx = "300" posy = "100">wrestler1</sprite>
+		<action asset = "door" callbacktype = "onClick" callbackname = "wrestler1">wrestlersound</asset>
 	</scene>
 </game>
 
-		<sprite layer = "2" sizey = "1" sizex = "1" posx = "300" posy = "100">Wrestler</sprite>
-		<sprite layer = "2" sizey = "3" sizex = "3" posx = "100" posy = "100">idle</sprite>
-		<sprite layer = "2" sizey = "3" sizex = "-3" posx = "200" posy = "100">walk</sprite>
+		<sprite asset = "Wrestler" layer = "2" sizey = "1" sizex = "1.1" posx = "300" posy = "100">wrestler1</sprite>
+		<sprite asset = "idle" layer = "2" sizey = "3" sizex = "3" posx = "100" posy = "100">idle1</sprite>
+		<sprite asset = "walk" layer = "2" sizey = "3" sizex = "-3" posx = "200" posy = "100">walk1</sprite>
+		<action asset = "sound1" callbacktype = "onClick">wrestlersound</asset>
