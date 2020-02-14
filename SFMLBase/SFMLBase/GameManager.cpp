@@ -60,6 +60,8 @@ void GameManager::LoadXML(string path) {
 
 	attr = FindAttribute(pNode, "title");
 	if (attr != NULL) GameConfig.name.append(attr->value());
+	attr = FindAttribute(pNode, "assetpath");
+	if (attr != NULL) GameConfig.assetPath.append(attr->value());
 	attr = FindAttribute(pNode, "width");
 	if (attr != NULL) GameConfig.width = atoi(attr->value());
 	attr = FindAttribute(pNode, "height");
@@ -67,9 +69,8 @@ void GameManager::LoadXML(string path) {
 	attr = FindAttribute(pNode, "fps");
 	if (attr != NULL) GameConfig.fps = atoi(attr->value());
 
-	pNode = FindChildNode(pNode, "assetpath"); 
+	pNode = FindChildNode(pNode, "assets"); 
 	if (pNode != NULL) {
-		GameConfig.assetPath.append(pNode->value());
 		for (xml_node<>* pChild = pNode->first_node(); pChild != NULL; pChild = pChild->next_sibling()) {
 			if (strcmp(pChild->name(), "asset") == 0) {
 				GameAsset* pAsset = NULL;
@@ -85,6 +86,11 @@ void GameManager::LoadXML(string path) {
 			}
 		}
 	}
+
+
+	player = new Player();
+	player->Setup(FindChildNode(pRootNode, "player"), assets);
+
 	for (xml_node<>* pChild = pNode->next_sibling(); pChild != NULL; pChild = pChild->next_sibling()) {
 		if (strcmp(pChild->name(), "scene") == 0) {
 			GameScene* pScene = new GameScene();
@@ -93,5 +99,6 @@ void GameManager::LoadXML(string path) {
 		}
 	}
 	currentScene = scenes[0];
+	currentScene->LoadScene(player);
 	doc.clear();
 }

@@ -5,7 +5,12 @@
 
 void GameScene::Setup(xml_node<>* sceneNode, map<string, GameAsset*>& assets)
 {
-	xml_attribute<>* attr;
+	xml_attribute<>* attr = GameManager::FindAttribute(sceneNode, "startposx");
+	if (attr != NULL) startPosition.x = atof(attr->value());
+	attr = GameManager::FindAttribute(sceneNode, "startposy");
+	if (attr != NULL) startPosition.y = atof(attr->value());
+
+
 	for (xml_node<>* pChild = sceneNode->first_node(); pChild != NULL; pChild = pChild->next_sibling()) {
 		if (strcmp(pChild->name(), "sprite") == 0) {
 			MySprite* newSprite = new MySprite();
@@ -31,8 +36,15 @@ void GameScene::Update(RenderWindow& window)
 		layerZero[i]->Update(window);
 	for (int i = 0; i < layerOne.size(); i++)
 		layerOne[i]->Update(window);
+	player->Render(window);
 	for (int i = 0; i < layerTwo.size(); i++)
 		layerTwo[i]->Update(window);
+}
+
+void GameScene::LoadScene(Player* _player)
+{
+	player = _player;
+	player->SetIntoScene(startPosition);
 }
 
 GameScene::GameScene()

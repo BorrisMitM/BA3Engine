@@ -1,9 +1,14 @@
-<game title="XMLTest" fps="50" height="768" width="1024">
-	<assetpath>assets\<asset type = "sprite" ID = "Wrestler">texture.jpg</asset>
-	<asset type = "anim" ID = "lol" width = "50" height = "37" duration = "1" amount = "6" offset = "8">Adventurer.png</asset>
-	</assetpath>
-	-<scene name="scene1">
-		<sprite layer = "2" sizey = "1" sizex = "1" posx = "300" posy = "100">Wrestler</sprite>
-		<sprite layer = "2" sizey = "3" sizex = "3" posx = "100" posy = "100">lol</sprite>
+<game title="XMLTest" fps="50" height="768" width="1024" assetpath = "assets\">
+	<assets>
+		<asset type = "sprite" ID = "Wrestler">texture.jpg</asset>
+		<asset type = "anim" ID = "walk" width = "50" height = "37" duration = "1" amount = "6" offset = "8">Adventurer.png</asset>
+		<asset type = "anim" ID = "idle" width = "50" height = "37" duration = "0.66" amount = "4" offset = "0">Adventurer.png</asset>
+	</assets>
+	<player speed = "150" ytop = "300" ybot = "700" topscale = "2" botscale = "4" idle ="idle" walk = "walk" spritescalex = "3" spritescaley = "3"></player>
+	-<scene name="scene1" startposx = "100" startposy = "400">
 	</scene>
 </game>
+
+		<sprite layer = "2" sizey = "1" sizex = "1" posx = "300" posy = "100">Wrestler</sprite>
+		<sprite layer = "2" sizey = "3" sizex = "3" posx = "100" posy = "100">idle</sprite>
+		<sprite layer = "2" sizey = "3" sizex = "-3" posx = "200" posy = "100">walk</sprite>

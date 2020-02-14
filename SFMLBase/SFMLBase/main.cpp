@@ -21,6 +21,7 @@ int main()
 	MyTime* time = new MyTime();
 	manager->LoadXML("Assets.xml");
 	sf::RenderWindow window(sf::VideoMode(manager->GameConfig.width, manager->GameConfig.height), manager->GameConfig.name);
+	window.setFramerateLimit(manager->GameConfig.fps);
 	bool mouseButtonDown = false;
 	bool mouseButtonUp = false;
 	while (window.isOpen())
@@ -32,6 +33,7 @@ int main()
 				window.close();
 		}
 		window.clear();
+		manager->player->Update(Vector2f(Mouse::getPosition(window)), mouseButtonDown);
 		HandleMouseButton(&mouseButtonDown, &mouseButtonUp);
 		manager->Update(window);
 		window.display();
