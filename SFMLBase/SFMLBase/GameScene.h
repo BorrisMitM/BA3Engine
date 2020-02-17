@@ -17,6 +17,7 @@ public:
 	vector<MySprite*> layerTwo;  // in front of player
 	vector<Action*> actions;
 	Vector2f startPosition;
+	float topBorder, botBorder, topScale, botScale, speed;
 	void Setup(xml_node<>* sceneNode, map<string, GameAsset*>& assets);
 	void CheckActions(RenderWindow& window, bool mouseDown, Vector2f mousePos);
 	void Update(RenderWindow& window);

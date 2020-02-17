@@ -16,9 +16,10 @@ private:
 	Vector2f moveDir;
 	Vector2f spriteScale;
 	int lastFrameTime;
-	float speed, topBorder, botBorder, topScale, botScale, scale;
+	float  scale;
 	void SetScale();
 public:
+	float speed, topBorder, botBorder, topScale, botScale;
 	Vector2f pos;
 	void Setup(xml_node<>* playerNode, map<string, GameAsset*>& assets);
 	void Update(Vector2f mousePos, bool mouseDown);

@@ -12,6 +12,17 @@ void GameScene::Setup(xml_node<>* sceneNode, map<string, GameAsset*>& assets)
 	attr = GameManager::FindAttribute(sceneNode, "name");
 	if (attr != NULL) name.append(attr->value());
 
+	attr = GameManager::FindAttribute(sceneNode, "speed");
+	if (attr != NULL) speed = atof(attr->value());
+	attr = GameManager::FindAttribute(sceneNode, "ytop");
+	if (attr != NULL) topBorder = atof(attr->value());
+	attr = GameManager::FindAttribute(sceneNode, "ybot");
+	if (attr != NULL) botBorder = atof(attr->value());
+	attr = GameManager::FindAttribute(sceneNode, "topscale");
+	if (attr != NULL) topScale = atof(attr->value());
+	attr = GameManager::FindAttribute(sceneNode, "botscale");
+	if (attr != NULL) botScale = atof(attr->value());
+
 	for (xml_node<>* pChild = sceneNode->first_node(); pChild != NULL; pChild = pChild->next_sibling()) {
 		if (strcmp(pChild->name(), "sprite") == 0) {
 			MySprite* newSprite = new MySprite();
@@ -53,6 +64,11 @@ void GameScene::Update(RenderWindow& window)
 void GameScene::LoadScene(Player* _player)
 {
 	player = _player;
+	player->botBorder = botBorder;
+	player->topBorder = topBorder;
+	player->botScale = botScale;
+	player->topScale = topScale;
+	player->speed = speed;
 	player->SetIntoScene(startPosition);
 }
 

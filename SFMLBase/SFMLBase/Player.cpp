@@ -17,17 +17,7 @@ void Player::SetScale()
 
 void Player::Setup(xml_node<>* playerNode, map<string, GameAsset*>& assets)
 {
-	xml_attribute<>* attr = GameManager::FindAttribute(playerNode, "speed");
-	if (attr != NULL) speed = atof(attr->value());
-	attr = GameManager::FindAttribute(playerNode, "ytop");
-	if (attr != NULL) topBorder = atof(attr->value());
-	attr = GameManager::FindAttribute(playerNode, "ybot");
-	if (attr != NULL) botBorder = atof(attr->value());
-	attr = GameManager::FindAttribute(playerNode, "topscale");
-	if (attr != NULL) topScale = atof(attr->value());
-	attr = GameManager::FindAttribute(playerNode, "botscale");
-	if (attr != NULL) botScale = atof(attr->value());
-	attr = GameManager::FindAttribute(playerNode, "spritescalex");
+	xml_attribute<>* attr = GameManager::FindAttribute(playerNode, "spritescalex");
 	if (attr != NULL) spriteScale.x = atof(attr->value());
 	else spriteScale.x = 1;
 	attr = GameManager::FindAttribute(playerNode, "spritescaley");
