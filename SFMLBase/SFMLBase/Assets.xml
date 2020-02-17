@@ -9,6 +9,7 @@
 	-<scene name="scene1" startposx = "100" startposy = "400">
 		<sprite asset = "Wrestler" layer = "1" sizey = "0.5" sizex = "0.5" posx = "300" posy = "300">wrestler1</sprite>
 		<action asset = "door" callbacktype = "onClick" callbackname = "wrestler1" triggerdistance = "100">wrestlersound</asset>
+		<action asset = "door" callbacktype = "onBorder" callbackname = "left" triggerdistance = "100">wrestlersound</asset>
 	</scene>
 </game>
 

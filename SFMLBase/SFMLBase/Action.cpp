@@ -6,7 +6,7 @@ void Action::Setup(xml_node<>* actionNode, map<string, GameAsset*>& assets)
 {
 	xml_attribute<>* attr = GameManager::FindAttribute(actionNode, "callbackname");
 	if (attr != NULL) callbackName.append(attr->value());
-	attr = GameManager::FindAttribute(actionNode, "callbackname");
+	attr = GameManager::FindAttribute(actionNode, "callbacktype");
 	if (attr != NULL) {
 		if (strcmp(attr->value(), "onClick") == 0) checkType = Check::onSprite;
 		else if (strcmp(attr->value(), "onBorder") == 0) checkType = Check::onBorder;
@@ -53,6 +53,36 @@ void Action::Check(RenderWindow& window, GameScene * scene, bool mouseDown, Vect
 				callback->Invoke();
 				scene->player->Update(scene->player->pos, true);
 				clickedOn = false;
+			}
+		}
+	}
+	else if (checkType == Check::onBorder) {
+		if (mouseDown) {
+			if (callbackName.compare("left") == 0) {
+				if (pos.x <= triggerDistance) clickedOn = true;
+				else clickedOn = false;
+			}
+			else if (callbackName.compare("right") == 0) 
+			{
+				if (pos.x >= window.getSize().x - triggerDistance) clickedOn = true;
+				else clickedOn = false;
+			}
+		}
+		if (clickedOn) {
+			if (callbackName.compare("left") == 0) {
+				if (scene->player->pos.x <= triggerDistance) {
+					clickedOn = false;
+					callback->Invoke();
+					scene->player->Update(scene->player->pos, true);
+				}
+			}
+			else if (callbackName.compare("right") == 0)
+			{
+				if (scene->player->pos.x>= window.getSize().x - triggerDistance) {
+					clickedOn = false;
+					callback->Invoke();
+					scene->player->Update(scene->player->pos, true);
+				}
 			}
 		}
 	}
