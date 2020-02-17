@@ -4,12 +4,21 @@
 		<asset type = "anim" ID = "walk" width = "50" height = "37" duration = "1" amount = "6" offset = "8">Adventurer.png</asset>
 		<asset type = "anim" ID = "idle" width = "50" height = "37" duration = "0.66" amount = "4" offset = "0">Adventurer.png</asset>
 		<asset type = "audio" ID = "door">Door.wav</asset>
+		<asset type = "loadScene" ID = "loadScene2">scene2</asset>
+		<asset type = "loadScene" ID = "loadScene1">scene1</asset>
 	</assets>
 	<player speed = "150" ytop = "300" ybot = "700" topscale = "2" botscale = "4" idle ="idle" walk = "walk" spritescalex = "3" spritescaley = "3"></player>
 	-<scene name="scene1" startposx = "100" startposy = "400">
 		<sprite asset = "Wrestler" layer = "1" sizey = "0.5" sizex = "0.5" posx = "300" posy = "300">wrestler1</sprite>
 		<action asset = "door" callbacktype = "onClick" callbackname = "wrestler1" triggerdistance = "100">wrestlersound</asset>
 		<action asset = "door" callbacktype = "onBorder" callbackname = "left" triggerdistance = "100">wrestlersound</asset>
+		<action asset = "loadScene2" callbacktype = "onBorder" callbackname = "right">loadScene2</asset>
+	</scene>
+	<scene name="scene2" startposx = "500" startposy = "500">
+		<sprite asset = "Wrestler" layer = "1" sizey = "0.5" sizex = "0.5" posx = "100" posy = "400">wrestler1</sprite>
+		<action asset = "door" callbacktype = "onClick" callbackname = "wrestler1" triggerdistance = "100">wrestlersound</asset>
+		<action asset = "door" callbacktype = "onBorder" callbackname = "left" triggerdistance = "100">wrestlersound</asset>
+		<action asset = "loadScene1" callbacktype = "onBorder" callbackname = "left" triggerdistance = "100">loadScene1</asset>
 	</scene>
 </game>
 

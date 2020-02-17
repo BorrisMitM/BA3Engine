@@ -54,6 +54,9 @@
     <ClCompile Include="ActionCallback.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="LoadSceneCallback.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets.xml">
@@ -95,6 +98,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="ActionCallback.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadSceneCallback.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

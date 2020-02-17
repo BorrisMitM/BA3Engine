@@ -18,6 +18,7 @@ private:
 
 	map<string, GameAsset*> assets;
 public:
+	static GameManager* instance;
 	GameScene* currentScene;
 	GameManager();
 	~GameManager();
@@ -29,6 +30,7 @@ public:
 	static xml_attribute<>* FindAttribute(xml_node<>* pNode, const char * name);
 	static xml_node<>* FindChildNode(xml_node<>* pNode, const char * name);
 
+	void LoadScene(string sceneName);
 	void Update(RenderWindow& window);
 	struct {
 		string name;

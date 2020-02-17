@@ -3,11 +3,16 @@
 #include "AnimationAsset.h"
 #include "Action.h"
 #include "AudioAction.h"
+#include "LoadSceneCallback.h"
 #include <cstring>
+#include <iostream>
 
 
+GameManager* GameManager::instance = NULL;
 GameManager::GameManager()
 {
+	if (instance == NULL) instance = this;
+	else delete(this);
 }
 
 
@@ -20,6 +25,16 @@ xml_node<>* GameManager::FindChildNode(xml_node<>* pNode, const char* name) {
 		if (strcmp(pChild->name(), name) == 0) return pChild;
 	}
 	return NULL;
+}
+
+void GameManager::LoadScene(string sceneName)
+{
+	for (int i = 0; i < scenes.size(); i++) {
+		if (sceneName.compare(scenes[i]->name) == 0) {
+			currentScene = scenes[i];
+			currentScene->LoadScene(player);
+		}
+	}
 }
 
 void GameManager::Update(RenderWindow& window)
@@ -79,6 +94,7 @@ void GameManager::LoadXML(string path) {
 					if (strcmp(attr->value(), "sprite") == 0) pAsset = new SpriteAsset();
 					else if (strcmp(attr->value(), "audio") == 0) pAsset = new AudioAction();
 					else if (strcmp(attr->value(), "anim") == 0) pAsset = new AnimationAsset();
+					else if (strcmp(attr->value(), "loadScene") == 0) pAsset = new LoadSceneCallback();
 					if(pAsset != NULL)
 						pAsset->Setup(pChild, GameConfig.assetPath);
 				}

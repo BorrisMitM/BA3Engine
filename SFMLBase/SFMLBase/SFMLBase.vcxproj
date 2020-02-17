@@ -133,6 +133,7 @@
     <ClCompile Include="GameAsset.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="LoadSceneCallback.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MySprite.cpp" />
     <ClCompile Include="MyTime.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="GameAsset.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="LoadSceneCallback.h" />
     <ClInclude Include="MySprite.h" />
     <ClInclude Include="MyTime.h" />
     <ClInclude Include="Player.h" />

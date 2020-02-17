@@ -9,7 +9,8 @@ void GameScene::Setup(xml_node<>* sceneNode, map<string, GameAsset*>& assets)
 	if (attr != NULL) startPosition.x = atof(attr->value());
 	attr = GameManager::FindAttribute(sceneNode, "startposy");
 	if (attr != NULL) startPosition.y = atof(attr->value());
-
+	attr = GameManager::FindAttribute(sceneNode, "name");
+	if (attr != NULL) name.append(attr->value());
 
 	for (xml_node<>* pChild = sceneNode->first_node(); pChild != NULL; pChild = pChild->next_sibling()) {
 		if (strcmp(pChild->name(), "sprite") == 0) {
