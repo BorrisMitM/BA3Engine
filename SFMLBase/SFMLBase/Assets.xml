@@ -1,4 +1,6 @@
-<game title="XMLTest" fps="50" height="768" width="1024" assetpath = "assets\">
+<game title="PointNClick" fps="50" height="700" width="1024" assetpath = "assets\">
+	<player  idle ="idle" walk = "walk" spritescalex = "3" spritescaley = "3"></player>
+	<textpreferences font = "Raleway-Black.ttf" size = "30" posx = "512" posy = "500"></textpreferences>
 	<assets>
 		<asset type = "sprite" ID = "Wrestler">texture.jpg</asset>
 		<asset type = "anim" ID = "walk" width = "50" height = "37" duration = "1" amount = "6" offset = "8">Adventurer.png</asset>
@@ -7,12 +9,11 @@
 		<asset type = "loadScene" ID = "loadScene2">scene2</asset>
 		<asset type = "loadScene" ID = "loadScene1">scene1</asset>
 	</assets>
-	<player  idle ="idle" walk = "walk" spritescalex = "3" spritescaley = "3"></player>
 	-<scene name="scene1" startposx = "100" startposy = "400" speed = "200" ytop = "300" ybot = "700" topscale = "2" botscale = "4">
 		<sprite asset = "Wrestler" layer = "1" sizey = "0.5" sizex = "0.5" posx = "300" posy = "300">wrestler1</sprite>
 		<action asset = "door" callbacktype = "onClick" callbackname = "wrestler1" triggerdistance = "100">wrestlersound</asset>
-		<action asset = "door" callbacktype = "onBorder" callbackname = "left" triggerdistance = "100">wrestlersound</asset>
-		<action asset = "loadScene2" callbacktype = "onBorder" callbackname = "right">loadScene2</asset>
+		<action asset = "door" callbacktype = "onBorder" callbackname = "right" triggerdistance = "100">wrestlersound</asset>
+		<action asset = "loadScene2" callbacktype = "onBorder" callbackname = "right" triggerdistance = "100">loadScene2</asset>
 	</scene>
 	<scene name="scene2" startposx = "500" startposy = "500" speed = "150" ytop = "300" ybot = "700" topscale = "0.5" botscale = "2">
 		<sprite asset = "Wrestler" layer = "1" sizey = "0.5" sizex = "0.5" posx = "100" posy = "400">wrestler1</sprite>
@@ -21,8 +22,3 @@
 		<action asset = "loadScene1" callbacktype = "onBorder" callbackname = "left" triggerdistance = "100">loadScene1</asset>
 	</scene>
 </game>
-
-		<sprite asset = "Wrestler" layer = "2" sizey = "1" sizex = "1.1" posx = "300" posy = "100">wrestler1</sprite>
-		<sprite asset = "idle" layer = "2" sizey = "3" sizex = "3" posx = "100" posy = "100">idle1</sprite>
-		<sprite asset = "walk" layer = "2" sizey = "3" sizex = "-3" posx = "200" posy = "100">walk1</sprite>
-		<action asset = "sound1" callbacktype = "onClick">wrestlersound</asset>

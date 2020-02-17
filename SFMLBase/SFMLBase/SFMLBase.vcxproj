@@ -139,6 +139,7 @@
     <ClCompile Include="MyTime.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SpriteAsset.cpp" />
+    <ClCompile Include="TextCallback.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets.xml">
@@ -159,6 +160,7 @@
     <ClInclude Include="MyTime.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SpriteAsset.h" />
+    <ClInclude Include="TextCallback.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

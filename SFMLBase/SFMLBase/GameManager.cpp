@@ -37,9 +37,18 @@ void GameManager::LoadScene(string sceneName)
 	}
 }
 
-void GameManager::Update(RenderWindow& window)
+void GameManager::Update(RenderWindow& window, Vector2f mousePos, bool mouseButtonDown)
 {
 	currentScene->Update(window);
+	if (textToShow.size() > 0) {
+		if (textToShow.compare(text->getString()) != 0) {
+			text->setString(textToShow);
+			text->setOrigin(text->getGlobalBounds().width / 2.0, text->getGlobalBounds().height);
+		}
+		window.draw(*text);
+	}
+	else player->Update(mousePos, mouseButtonDown);
+	currentScene->CheckActions(window, mouseButtonDown, mousePos);
 }
 
 
@@ -84,7 +93,29 @@ void GameManager::LoadXML(string path) {
 	attr = FindAttribute(pNode, "fps");
 	if (attr != NULL) GameConfig.fps = atoi(attr->value());
 
-	pNode = FindChildNode(pNode, "assets"); 
+
+	//textpreferences
+	pNode = FindChildNode(pRootNode, "textpreferences");
+	if (pNode) {
+		attr = FindAttribute(pNode, "font");
+		font.loadFromFile(GameConfig.assetPath + attr->value());
+		text = new Text("", font);
+		attr = FindAttribute(pNode, "size");
+		if (attr != NULL) text->setCharacterSize(atoi(attr->value()));
+		else text->setCharacterSize(50);
+		text->setFillColor(Color(255, 255, 255, 255));
+		int xPos = 500;
+		int yPos = 100;
+		attr = FindAttribute(pNode, "posx");
+		if (attr != NULL) xPos = atoi(attr->value());
+		attr = FindAttribute(pNode, "posy");
+		if (attr != NULL) yPos = atoi(attr->value());
+		text->setPosition(Vector2f(xPos, yPos));
+		text->setOrigin(text->getGlobalBounds().width / 2.0, text->getGlobalBounds().height);
+	}
+
+	//assets
+	pNode = FindChildNode(pRootNode, "assets");
 	if (pNode != NULL) {
 		for (xml_node<>* pChild = pNode->first_node(); pChild != NULL; pChild = pChild->next_sibling()) {
 			if (strcmp(pChild->name(), "asset") == 0) {
@@ -104,6 +135,7 @@ void GameManager::LoadXML(string path) {
 	}
 
 
+	//player
 	player = new Player();
 	player->Setup(FindChildNode(pRootNode, "player"), assets);
 

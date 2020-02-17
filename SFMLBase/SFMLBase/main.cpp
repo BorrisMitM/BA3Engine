@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include "GameManager.h"
 #include "MyTime.h"
+#include "TextCallback.h"
 using namespace std;
 using namespace sf;
 using namespace rapidxml;
@@ -33,10 +34,8 @@ int main()
 				window.close();
 		}
 		window.clear();
-		manager->player->Update(Vector2f(Mouse::getPosition(window)), mouseButtonDown);
-		manager->currentScene->CheckActions(window, mouseButtonDown, Vector2f(Mouse::getPosition(window)));
 		HandleMouseButton(&mouseButtonDown, &mouseButtonUp);
-		manager->Update(window);
+		manager->Update(window, Vector2f(Mouse::getPosition(window)), mouseButtonDown);
 		window.display();
 	}
 

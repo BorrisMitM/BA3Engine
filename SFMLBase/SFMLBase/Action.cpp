@@ -14,7 +14,7 @@ void Action::Setup(xml_node<>* actionNode, map<string, GameAsset*>& assets)
 	callback = (ActionCallback*)assets[GameManager::FindAttribute(actionNode, "asset")->value()];
 	attr = GameManager::FindAttribute(actionNode, "triggerdistance");
 	if (attr != NULL) triggerDistance = atof(attr->value());
-	else triggerDistance = 50.0;
+	else triggerDistance = 100.0;
 }
 
 void Action::Check(RenderWindow& window, GameScene * scene, bool mouseDown, Vector2f pos)

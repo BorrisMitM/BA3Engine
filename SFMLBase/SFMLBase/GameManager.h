@@ -10,7 +10,6 @@
 using namespace std;
 using namespace rapidxml;
 
-
 class GameManager
 {
 private:
@@ -22,7 +21,9 @@ public:
 	GameScene* currentScene;
 	GameManager();
 	~GameManager();
-
+	string textToShow;
+	Font font;
+	Text* text;
 	void LoadXML(string path);
 
 	Player* player;
@@ -31,7 +32,7 @@ public:
 	static xml_node<>* FindChildNode(xml_node<>* pNode, const char * name);
 
 	void LoadScene(string sceneName);
-	void Update(RenderWindow& window);
+	void Update(RenderWindow& window, Vector2f mousePos, bool mouseButtonDown);
 	struct {
 		string name;
 		int width;
