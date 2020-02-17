@@ -13,13 +13,13 @@ private:
 	DrawableAsset* walkAnimation;
 	bool moving;
 	Vector2f targetPos;
-	Vector2f pos;
 	Vector2f moveDir;
 	Vector2f spriteScale;
 	int lastFrameTime;
 	float speed, topBorder, botBorder, topScale, botScale, scale;
 	void SetScale();
 public:
+	Vector2f pos;
 	void Setup(xml_node<>* playerNode, map<string, GameAsset*>& assets);
 	void Update(Vector2f mousePos, bool mouseDown);
 	void SetIntoScene(Vector2f pos);

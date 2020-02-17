@@ -12,6 +12,9 @@ void Action::Setup(xml_node<>* actionNode, map<string, GameAsset*>& assets)
 		else if (strcmp(attr->value(), "onBorder") == 0) checkType = Check::onBorder;
 	}
 	callback = (ActionCallback*)assets[GameManager::FindAttribute(actionNode, "asset")->value()];
+	attr = GameManager::FindAttribute(actionNode, "triggerdistance");
+	if (attr != NULL) triggerDistance = atof(attr->value());
+	else triggerDistance = 50.0;
 }
 
 void Action::Check(RenderWindow& window, GameScene * scene, bool mouseDown, Vector2f pos)
@@ -19,16 +22,37 @@ void Action::Check(RenderWindow& window, GameScene * scene, bool mouseDown, Vect
 	if (checkType == Check::onSprite)
 	{
 		if (mouseDown) {
-			MySprite* sprite = NULL;
+			if(clickOnSprite == NULL)
 			for (int i = 0; i < scene->layerOne.size(); i++) {
 				if (scene->layerOne[i]->name.compare(callbackName) == 0) {
-					sprite = scene->layerOne[i];
+					clickOnSprite = scene->layerOne[i];
 					break;
 				}
 			}
-			if (sprite != NULL) {
-				if (sprite->MouseOnSprite(window))
-					callback->Invoke();
+			if (clickOnSprite == NULL) {
+				for (int i = 0; i < scene->layerTwo.size(); i++) {
+					if (scene->layerTwo[i]->name.compare(callbackName) == 0) {
+						clickOnSprite = scene->layerTwo[i];
+						break;
+					}
+				}
+			}
+			if (clickOnSprite != NULL) {
+				if (clickOnSprite->MouseOnSprite(window))
+					clickedOn = true;
+				else clickedOn = false;
+			}
+		}
+		if (clickedOn && clickOnSprite != NULL) {
+			float playerX = scene->player->pos.x;
+			float playerY = scene->player->pos.y;
+			float distanceToPlayer = sqrtf((playerX - clickOnSprite->pos.x) * (playerX - clickOnSprite->pos.x)
+				+ (playerY - clickOnSprite->pos.y) * (playerY - clickOnSprite->pos.y));
+			if (distanceToPlayer <= triggerDistance)
+			{
+				callback->Invoke();
+				scene->player->Update(scene->player->pos, true);
+				clickedOn = false;
 			}
 		}
 	}
