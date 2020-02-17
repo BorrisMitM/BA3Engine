@@ -16,6 +16,9 @@ private:
 
 
 	map<string, GameAsset*> assets;
+	vector<string> texts;
+	int currentTextIndex;
+	void HandleText(bool mouseButtonDown);
 public:
 	static GameManager* instance;
 	GameScene* currentScene;
@@ -33,6 +36,7 @@ public:
 
 	void LoadScene(string sceneName);
 	void Update(RenderWindow& window, Vector2f mousePos, bool mouseButtonDown);
+	void StartDialog(vector<string> texts);
 	struct {
 		string name;
 		int width;

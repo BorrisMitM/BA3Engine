@@ -55,6 +55,8 @@ void Player::Update(Vector2f mousePos, bool mouseDown)
 	}
 	int currentTime = MyTime::clock->getElapsedTime().asMilliseconds();
 	float deltaTime = (currentTime - lastFrameTime) / 1000.0;
+	//check for lag and also usefull if dialog takes place
+	if (deltaTime > 2.0 / GameManager::instance->GameConfig.fps) deltaTime = 1.0 / GameManager::instance->GameConfig.fps;
 	lastFrameTime = currentTime;
 	if (!moving) return;
 	float travelDistance = speed * deltaTime;

@@ -4,11 +4,25 @@
 #include "Action.h"
 #include "AudioAction.h"
 #include "LoadSceneCallback.h"
+#include "TextCallback.h"
+#include "MyTime.h"
 #include <cstring>
 #include <iostream>
 
 
 GameManager* GameManager::instance = NULL;
+void GameManager::HandleText(bool mouseButtonDown)
+{
+	if (texts.size() > 0) {
+		if (mouseButtonDown) {
+			currentTextIndex++;
+			if (currentTextIndex >= texts.size()) {
+				texts.clear();
+				return;
+			}
+		}
+	}
+}
 GameManager::GameManager()
 {
 	if (instance == NULL) instance = this;
@@ -40,15 +54,24 @@ void GameManager::LoadScene(string sceneName)
 void GameManager::Update(RenderWindow& window, Vector2f mousePos, bool mouseButtonDown)
 {
 	currentScene->Update(window);
-	if (textToShow.size() > 0) {
-		if (textToShow.compare(text->getString()) != 0) {
-			text->setString(textToShow);
+	HandleText(mouseButtonDown);
+	if (texts.size() > 0) {
+		if (texts[currentTextIndex].compare(text->getString()) != 0) {
+			text->setString(texts[currentTextIndex]);
 			text->setOrigin(text->getGlobalBounds().width / 2.0, text->getGlobalBounds().height);
 		}
 		window.draw(*text);
 	}
-	else player->Update(mousePos, mouseButtonDown);
-	currentScene->CheckActions(window, mouseButtonDown, mousePos);
+	else {
+		player->Update(mousePos, mouseButtonDown);
+		currentScene->CheckActions(window, mouseButtonDown, mousePos);
+	}
+}
+
+void GameManager::StartDialog(vector<string> _texts)
+{
+	currentTextIndex = 0;
+	texts = _texts;
 }
 
 
@@ -126,6 +149,8 @@ void GameManager::LoadXML(string path) {
 					else if (strcmp(attr->value(), "audio") == 0) pAsset = new AudioAction();
 					else if (strcmp(attr->value(), "anim") == 0) pAsset = new AnimationAsset();
 					else if (strcmp(attr->value(), "loadScene") == 0) pAsset = new LoadSceneCallback();
+					else if (strcmp(attr->value(), "dialog") == 0) pAsset = new TextCallback();
+
 					if(pAsset != NULL)
 						pAsset->Setup(pChild, GameConfig.assetPath);
 				}
