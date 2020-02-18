@@ -7,8 +7,9 @@ using namespace sf;
 using namespace rapidxml;
 class MySprite
 {
-public:
+private:
 	DrawableAsset* sprite;
+public:
 	Vector2f pos;
 	Vector2f size;
 	string name;

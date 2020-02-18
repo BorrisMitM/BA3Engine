@@ -13,30 +13,31 @@ using namespace rapidxml;
 class GameManager
 {
 private:
-
-
-	map<string, GameAsset*> assets;
-	vector<string> texts;
-	int currentTextIndex;
-	void HandleText(bool mouseButtonDown);
-public:
-	static GameManager* instance;
+	map<string, GameAsset*> assets;	//map of all Assets accesable through the right ID
 	GameScene* currentScene;
-	GameManager();
-	~GameManager();
+	Player* player;
+	vector<GameScene*> scenes;
+	
+	//text display independent of the current scene
+	vector<string> texts;
+	int currentTextIndex;					
+	void HandleText(bool mouseButtonDown);
 	string textToShow;
 	Font font;
 	Text* text;
-	void LoadXML(string path);
+public:
+	static GameManager* instance; // Singelton so it does not have to get passed through multiple Update functions to get a reference
+	GameManager();
+	~GameManager();
 
-	Player* player;
-	vector<GameScene*> scenes;
+	void LoadXML(string path);
 	static xml_attribute<>* FindAttribute(xml_node<>* pNode, const char * name);
 	static xml_node<>* FindChildNode(xml_node<>* pNode, const char * name);
 
 	void LoadScene(string sceneName);
 	void Update(RenderWindow& window, Vector2f mousePos, bool mouseButtonDown);
 	void StartDialog(vector<string> texts);
+
 	struct {
 		string name;
 		int width;

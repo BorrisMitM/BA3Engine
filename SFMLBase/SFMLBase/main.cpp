@@ -12,7 +12,7 @@ using namespace sf;
 using namespace rapidxml;
 
 bool SpriteClicked(Window *window, Sprite * sprite);
-void HandleMouseButton(bool* mouseButtonDown, bool* mouseButtonUp);
+void HandleMouseButton(RenderWindow* window, bool* mouseButtonDown, bool* mouseButtonUp);
 
 
 
@@ -34,7 +34,7 @@ int main()
 				window.close();
 		}
 		window.clear();
-		HandleMouseButton(&mouseButtonDown, &mouseButtonUp);
+		HandleMouseButton(&window, &mouseButtonDown, &mouseButtonUp);
 		manager->Update(window, Vector2f(Mouse::getPosition(window)), mouseButtonDown);
 		window.display();
 	}
@@ -42,17 +42,18 @@ int main()
 	return 0;
 }
 
-bool SpriteClicked(Window* window, Sprite* sprite) {
-	if ((float)Mouse::getPosition(*window).x >= sprite->getPosition().x
-		&& (float)Mouse::getPosition(*window).x <= sprite->getPosition().x + sprite->getTextureRect().width
-		&& (float)Mouse::getPosition(*window).y >= sprite->getPosition().y
-		&& (float)Mouse::getPosition(*window).y <= sprite->getPosition().y + sprite->getTextureRect().height)
-		return true;
-	return false;
-}
 bool canMouseButtonDown = true;
 bool canMouseButtonUp = true;
-void HandleMouseButton(bool* mouseButtonDown, bool* mouseButtonUp) {
+//sets mouseButtonDown / mouseButtonUp for one frame when the mouse is pressed / unpressed
+void HandleMouseButton(RenderWindow* window, bool* mouseButtonDown, bool* mouseButtonUp) {
+	//check if mouse is inside the window
+	if( Mouse::isButtonPressed(Mouse::Left) ){
+		if ((float)Mouse::getPosition(*window).x < 0
+			|| (float)Mouse::getPosition(*window).x > window->getSize().x
+			|| (float)Mouse::getPosition(*window).y < 0
+			|| (float)Mouse::getPosition(*window).y > window->getSize().y)
+			return;
+	}
 	if (!(*mouseButtonDown) && Mouse::isButtonPressed(Mouse::Left) && canMouseButtonDown) {
 		*mouseButtonDown = true;
 		canMouseButtonDown = false;

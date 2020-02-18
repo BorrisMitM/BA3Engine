@@ -11,21 +11,11 @@
 
 
 GameManager* GameManager::instance = NULL;
-void GameManager::HandleText(bool mouseButtonDown)
-{
-	if (texts.size() > 0) {
-		if (mouseButtonDown) {
-			currentTextIndex++;
-			if (currentTextIndex >= texts.size()) {
-				texts.clear();
-				return;
-			}
-		}
-	}
-}
+
+
 GameManager::GameManager()
 {
-	if (instance == NULL) instance = this;
+	if (instance == NULL) instance = this;//Singelton
 	else delete(this);
 }
 
@@ -34,12 +24,7 @@ GameManager::~GameManager()
 {
 }
 
-xml_node<>* GameManager::FindChildNode(xml_node<>* pNode, const char* name) {
-	for (xml_node<>* pChild = pNode->first_node(); pChild != NULL; pChild = pChild->next_sibling()) {
-		if (strcmp(pChild->name(), name) == 0) return pChild;
-	}
-	return NULL;
-}
+
 
 void GameManager::LoadScene(string sceneName)
 {
@@ -53,7 +38,7 @@ void GameManager::LoadScene(string sceneName)
 
 void GameManager::Update(RenderWindow& window, Vector2f mousePos, bool mouseButtonDown)
 {
-	currentScene->Update(window);
+	currentScene->Update(window);//Renders everything in the scene to the window
 	HandleText(mouseButtonDown);
 	if (texts.size() > 0) {
 		if (texts[currentTextIndex].compare(text->getString()) != 0) {
@@ -63,26 +48,17 @@ void GameManager::Update(RenderWindow& window, Vector2f mousePos, bool mouseButt
 		window.draw(*text);
 	}
 	else {
+		//don't let player move or interact with other objects while text gets displayed
 		player->Update(mousePos, mouseButtonDown);
 		currentScene->CheckActions(window, mouseButtonDown, mousePos);
 	}
 }
 
-void GameManager::StartDialog(vector<string> _texts)
-{
-	currentTextIndex = 0;
-	texts = _texts;
-}
 
-
-xml_attribute<>* GameManager::FindAttribute(xml_node<>* pNode, const char* name) {
-	for (xml_attribute<>* pAttribute = pNode->first_attribute(); pAttribute != NULL; pAttribute = pAttribute->next_attribute()) {
-		if (strcmp(pAttribute->name(), name) == 0) return pAttribute;
-	}
-	return NULL;
-}
 
 void GameManager::LoadXML(string path) {
+
+	//XML Setup
 	ifstream MyFile(path, ios::binary);
 
 	//get size
@@ -105,6 +81,7 @@ void GameManager::LoadXML(string path) {
 	xml_node<>*	pRootNode = doc.first_node();
 	xml_node<>* pNode = pRootNode;
 
+	//General GameConfig data
 	attr = FindAttribute(pNode, "title");
 	if (attr != NULL) GameConfig.name.append(attr->value());
 	attr = FindAttribute(pNode, "assetpath");
@@ -158,12 +135,13 @@ void GameManager::LoadXML(string path) {
 			}
 		}
 	}
-
+	//player and scenes need assets to be loaded already
 
 	//player
 	player = new Player();
 	player->Setup(FindChildNode(pRootNode, "player"), assets);
 
+	//scenes 
 	for (xml_node<>* pChild = pNode->next_sibling(); pChild != NULL; pChild = pChild->next_sibling()) {
 		if (strcmp(pChild->name(), "scene") == 0) {
 			GameScene* pScene = new GameScene();
@@ -174,4 +152,39 @@ void GameManager::LoadXML(string path) {
 	currentScene = scenes[0];
 	currentScene->LoadScene(player);
 	doc.clear();
+}
+
+//Dialog Handling
+void GameManager::StartDialog(vector<string> _texts)
+{
+	currentTextIndex = 0;
+	texts = _texts;
+}
+
+void GameManager::HandleText(bool mouseButtonDown)
+{
+	if (texts.size() > 0) {
+		if (mouseButtonDown) {
+			currentTextIndex++;
+			if (currentTextIndex >= texts.size()) {
+				texts.clear();
+				return;
+			}
+		}
+	}
+}
+
+//XML helper functions
+xml_node<>* GameManager::FindChildNode(xml_node<>* pNode, const char* name) {
+	for (xml_node<>* pChild = pNode->first_node(); pChild != NULL; pChild = pChild->next_sibling()) {
+		if (strcmp(pChild->name(), name) == 0) return pChild;
+	}
+	return NULL;
+}
+
+xml_attribute<>* GameManager::FindAttribute(xml_node<>* pNode, const char* name) {
+	for (xml_attribute<>* pAttribute = pNode->first_attribute(); pAttribute != NULL; pAttribute = pAttribute->next_attribute()) {
+		if (strcmp(pAttribute->name(), name) == 0) return pAttribute;
+	}
+	return NULL;
 }

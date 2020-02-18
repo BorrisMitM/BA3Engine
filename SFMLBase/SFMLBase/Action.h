@@ -7,6 +7,7 @@ class GameScene;
 enum Check { onSprite, onBorder };
 class Action 
 {
+	//This class takes care of checking for a certain condition and the calling its designated callback.
 private:
 	Check checkType;
 	string callbackName;

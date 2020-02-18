@@ -21,6 +21,7 @@ void Action::Check(RenderWindow& window, GameScene * scene, bool mouseDown, Vect
 {
 	if (checkType == Check::onSprite)
 	{
+		//checks if sprite exisist if not linked yet and then checks if the mouse is intersecting with the sprite.
 		if (mouseDown) {
 			if(clickOnSprite == NULL)
 			for (int i = 0; i < scene->layerOne.size(); i++) {
@@ -43,11 +44,13 @@ void Action::Check(RenderWindow& window, GameScene * scene, bool mouseDown, Vect
 				else clickedOn = false;
 			}
 		}
+		//if clicked on the corresponding sprite the player first has to move into range to interact
 		if (clickedOn && clickOnSprite != NULL) {
 			float playerX = scene->player->pos.x;
 			float playerY = scene->player->pos.y;
 			float distanceToPlayer = sqrtf((playerX - clickOnSprite->pos.x) * (playerX - clickOnSprite->pos.x)
 				+ (playerY - clickOnSprite->pos.y) * (playerY - clickOnSprite->pos.y));
+			//stop player and invoke callback if in range
 			if (distanceToPlayer <= triggerDistance)
 			{
 				callback->Invoke();
@@ -57,6 +60,7 @@ void Action::Check(RenderWindow& window, GameScene * scene, bool mouseDown, Vect
 		}
 	}
 	else if (checkType == Check::onBorder) {
+		//same logic as above but with a different check
 		if (mouseDown) {
 			if (callbackName.compare("left") == 0) {
 				if (pos.x <= triggerDistance) clickedOn = true;

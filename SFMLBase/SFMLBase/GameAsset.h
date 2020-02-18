@@ -11,6 +11,7 @@ using namespace rapidxml;
 
 class GameAsset
 {
+	//base class for all GameAssets
 public:
 	string ID;
 	virtual void Setup(xml_node<>* pNode, string assetPath);

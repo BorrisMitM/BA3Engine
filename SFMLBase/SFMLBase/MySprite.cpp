@@ -22,7 +22,7 @@ void MySprite::Setup(xml_node<>* spriteNode, map<string, GameAsset*>& assets)
 
 void MySprite::Update(RenderWindow & window)
 {
-	sprite->Update(window, pos, size);
+	sprite->Update(window, pos, size); //can be animation or static sprite
 }
 
 bool MySprite::MouseOnSprite(RenderWindow & window)

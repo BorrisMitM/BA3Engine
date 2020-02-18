@@ -52,6 +52,7 @@ void GameScene::CheckActions(RenderWindow & window, bool mouseDown, Vector2f mou
 
 void GameScene::Update(RenderWindow& window)
 {
+	//here the render order is determined 
 	for (int i = 0; i < layerZero.size(); i++)
 		layerZero[i]->Update(window);
 	for (int i = 0; i < layerOne.size(); i++)
@@ -63,6 +64,7 @@ void GameScene::Update(RenderWindow& window)
 
 void GameScene::LoadScene(Player* _player)
 {
+	//set player variables
 	player = _player;
 	player->botBorder = botBorder;
 	player->topBorder = topBorder;
